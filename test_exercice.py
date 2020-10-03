@@ -2,22 +2,20 @@
 # -*- coding: utf-8 -*-
 
 import os
+from random import randint
 import sys
 import unittest
-from collections import Counter
+from structs import Queue, Stack
 
 import exercice
 
 
 class TestExercice(unittest.TestCase):
-    def test_list_to_dict(self):
-        values = [
-            ["a", "b", "z", "patate"],
-            ["a", "2", "hello", "tigre"]
-        ]
+    def test_reverse(self):
+        values = ["a", "b", "z", "patate"]
 
-        output = [exercice.list_to_dict(v) for v in values]
-        answer = [{"a": 0, "b": 1, "z": 2, "patate": 3}, {"a": 0, "2": 1, "hello": 2, "tigre": 3}]
+        output = exercice.reverse_data(values)
+        answer = ["patate", "z", "b", "a"]
 
         self.assertListEqual(
             output,
@@ -25,13 +23,14 @@ class TestExercice(unittest.TestCase):
             'Mauvaise reponse'
         )
 
-    def test_color_name_to_hex(self):
-        colors = [["blue", "red", "green", "yellow", "black", "white"],
-                  ["orange", "blue", "red", "brown"]]
+    def test_delete_stack(self):
+        lifo = Stack()
+        lifo.put_many(list(range(20)))
         
-        answer = [[('blue', '#0000FF'), ('red', '#FF0000'), ('green', '#008000'), ('yellow', '#FFFF00'), ('black', '#000000'), ('white', '#FFFFFF')],
-                    [('orange', '#FFA500'), ('blue', '#0000FF'), ('red', '#FF0000'), ('brown', '#A52A2A')]]
-        output = [exercice.color_name_to_hex(v) for v in colors]
+        answer = Stack()
+        answer.put_many(list(range(19)))
+
+        output = exercice.delete_nth_from_stack(lifo, len(lifo) - 1)
 
         self.assertEqual(
             output,
@@ -39,10 +38,14 @@ class TestExercice(unittest.TestCase):
             'Mauvaise reponse'
         )
 
-    def test_odd_integer_for_loop(self):
-        integer = 46
-        output = exercice.odd_integer_for_loop(integer)
-        answer = [i for i in range(integer) if i % 2 == 1]
+    def test_delete_queue(self):
+        fifo = Queue()
+        fifo.put_many(list(range(20)))
+        
+        answer = Queue()
+        answer.put_many(list(range(1, 20)))
+
+        output = exercice.delete_nth_from_queue(fifo, 0)
 
         self.assertEqual(
             output,
@@ -50,10 +53,14 @@ class TestExercice(unittest.TestCase):
             'Mauvaise reponse'
         )
 
-    def test_odd_integer_list_comprehension(self):
-        integer = 25
-        output = exercice.odd_integer_list_comprehension(integer)
-        answer = [i for i in range(integer) if i % 2 == 1]
+    def test_sort_stack(self):
+        values = [randint(0, 1000) for _ in range(20)]
+        lifo = Stack()
+        lifo.put_many(values)
+
+        output = exercice.sort_stack(lifo)
+        answer = Stack()
+        answer.put_many(sorted(values))
 
         self.assertEqual(
             output,
@@ -61,10 +68,14 @@ class TestExercice(unittest.TestCase):
             'Mauvaise reponse'
         )
 
-    def test_word_dict_for_loop(self):
-        words = ["Given", "a", "two", "list", "of", "equal", "size", "create"]
-        output = exercice.word_dict_for_loop(words)
-        answer = {word[0].upper(): word for word in words}
+    def test_sort_queue(self):
+        values = [randint(0, 1000) for _ in range(20)]
+        fifo = Queue()
+        fifo.put_many(values)
+
+        output = exercice.sort_stack(fifo)
+        answer = Queue()
+        answer.put_many(sorted(values))
 
         self.assertEqual(
             output,
@@ -72,14 +83,23 @@ class TestExercice(unittest.TestCase):
             'Mauvaise reponse'
         )
 
-    def test_word_dict_comprehension(self):
-        words = ["Given", "a", "two", "list", "of", "equal", "size", "create"]
-        output = exercice.word_dict_comprehension(words)
-        answer = {word[0].upper(): word for word in words}
+    def test_string_and_structs(self):
+        sequence = "te!eYy.E6e/T"
+
+        output_fifo, output_lifo = exercice.string_and_structs(sequence)
+        fifo, lifo =  Queue, Stack
+        fifo.put_many("Yeet")
+        lifo.put_many("yEeT")
 
         self.assertEqual(
-            output,
-            answer,
+            output_fifo,
+            fifo,
+            'Mauvaise reponse'
+        )
+
+        self.assertEqual(
+            output_lifo,
+            lifo,
             'Mauvaise reponse'
         )
 

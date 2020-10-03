@@ -1,71 +1,77 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
-from matplotlib.colors import cnames
-
-
-def list_to_dict(some_list: list) -> dict:
-    # TODO: Transformer la liste en dictionnaire, les éléments de la liste deviennent les clés et leur index deviennent les valeurs
-    return {}
+from random import randint
+from structs import Queue, Stack
 
 
-def color_name_to_hex(colors: list) -> list:
-    # TODO: Trouver la valeur hex de chaque couleur dans la liste et créer une liste de tupple où le premier élément est le nom de la couleur et le deuxième est la valeur hex
-    return []
+def reverse_data(data: list = None):
+    # TODO: Demander 10 valeurs à l'utilisateur,
+    # les stocker dans une structure de données,
+    # et les retourner en ordre inverse, sans utiliser de liste.
+
+    if data is None:
+        pass  # Demander les valeurs ici
+
+    reversed_data = None  # Stocker le résultat ici
+
+    return reversed_data
 
 
-def odd_integer_for_loop(end: int) -> list:
-
-    return []
-
-
-def odd_integer_list_comprehension(end: int) -> list:
-    return []
+def delete_nth_from_stack(data: Stack, position: int) -> Stack:
+    # TODO: Supprimer le énième (position) élément de data et retourner la nouvelle structure de données.
+    return Stack()
 
 
-def loop_traversal(integers: list) -> None:
-    pass
+def delete_nth_from_queue(data: Queue, position: int) -> Queue:
+    # TODO: Supprimer le énième (position) élément de data et retourner la nouvelle structure de données.
+    return Queue()
 
 
-def word_dict_for_loop(words: list) -> dict:
-    return {}
+def sort_stack(data: Stack) -> Stack:
+    # TODO: Retourner la séquence triée
+    return Stack()
 
 
-def word_dict_comprehension(words: list) -> dict:
-    return {}
+def sort_queue(data: Queue) -> Queue:
+    # TODO: Retourner la séquence triée
+    return Queue()
 
 
-def dictionary_traversal(words: dict) -> None:
-    pass
+def string_and_structs(string: str) -> tuple:
+    # TODO: Parcourez la chaîne de caractères.
+    # Si le caractère est une lettre, on l'ajoute dans fifo.
+    # Sinon, on retire un élément de fifo pour l'insérer dans lifo.
+
+    fifo, lifo = Queue(), Stack()
+
+    return fifo, lifo
 
 
 def main() -> None:
-    some_list = ["a", "b", "z", "patate"]
-    print(f"La liste suivante {some_list} est transformée en dictionnaire: {list_to_dict(some_list)}")
+    print("On inverse des données...")
+    print(f"Résultat: {reverse_data()}")
 
-    colors = ["blue", "red", "green", "yellow", "black", "white"]
-    print(f"La valeur hex associée aux couleurs est: {color_name_to_hex(colors)}")
+    n = 4
+    lifo = Stack()
+    lifo.put_many([i for i in range(20)])
+    print(f"On retire l'élément à la position {n} de la pile et on obtient: {delete_nth_from_stack(lifo, n)}")
 
-    integer = 13
-    integers_for = odd_integer_for_loop(integer)
-    print(f"Liste avec boucle for et le nombre 13: {integers_for}")
-    integers_comprehension = odd_integer_for_loop(integer)
-    print(f"Liste avec list comprehension et le nombre 13: {integers_comprehension}")
+    n = 6
+    fifo = Queue()
+    fifo.put_many([i for i in range(20)])
+    print(f"On retire l'élément à la position {n} de la file et on obtient: {delete_nth_from_queue(fifo, n)}")
 
-    print(f"Les 2 listes sont-elles identiques? {integers_for == integers_comprehension}")
-    print(f"Parcours d'une des 2 listes...")
-    loop_traversal(integers_for)
+    lifo = Stack()
+    lifo.put_many([randint(0, 1000) for _ in range(20)])
+    print(f"On ordonne une file: {sort_queue(lifo)}")
 
-    words = ["initialisation", "ajout", "modification", "suppression", "dictionnaire"]
-    words_for = word_dict_for_loop(words)
-    print(f"Dictionnaire avec la boucle for: {words_for}")
-    words_comprehension = word_dict_comprehension(words)
-    print(f"Dictionnaire avec le dictionary comprehension: {words_comprehension}")
+    fifo = Queue()
+    fifo.put_many([randint(0, 1000) for _ in range(20)])
+    print(f"On ordonne une file: {sort_queue(fifo)}")
 
-    print(f"Les 2 dictionnaires sont-ils identiques? {words_for == words_comprehension}")
-    print(f"Parcours d'un des 2 dictionnaires...")
-    dictionary_traversal(words_comprehension)
+    sequence = "te!eYy.E6e/T"
+    print(f"Le résulat de la manipulation de la séquence: {string_and_structs(sequence)}")
 
 
 if __name__ == '__main__':
