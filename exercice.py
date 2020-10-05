@@ -3,7 +3,7 @@
 
 from random import randint
 from structs import Queue, Stack
-
+from collections import deque
 
 def reverse_data(data: list = None):
     # TODO: Demander 10 valeurs à l'utilisateur,
@@ -64,7 +64,7 @@ def main() -> None:
 
     lifo = Stack()
     lifo.put_many([randint(0, 1000) for _ in range(20)])
-    print(f"On ordonne une file: {sort_queue(lifo)}")
+    print(f"On ordonne une file: {sort_stack(lifo)}")
 
     fifo = Queue()
     fifo.put_many([randint(0, 1000) for _ in range(20)])
